@@ -13,7 +13,16 @@ namespace Vraze.Controllers
         [Route("Admin/Home")]
         public ActionResult Index()
         {
-            return View();
+            //if (!User.Identity.IsAuthenticated)
+            //    return RedirectToAction(nameof(LoginView));
+            //else
+                return View();
+        }
+
+        [Route("Admin/Login")]
+        public ActionResult LoginView()
+        {
+            return View("Login");
         }
 
         // GET: Admin/Challenge/Manage/

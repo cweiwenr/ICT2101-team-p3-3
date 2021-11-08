@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2AMOdwExvDlchNAVaj/pRmcq5euX/QITxecMNuUaigiIktESNMZ9sEyQNNkwAnJzeHJW3atCCNdVhd2HAP9pDQ==",
+  "dgSpecHash": "CgQ2ZGH4yBXy82ZgSV6/V+QkAqOPcQnaMNX6ouYYz7bGMKT1jQTB25LW8JIyw06MhqqasqpVvqN2rHGX31ISFg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Thinkpad\\OneDrive - Singapore Institute Of Technology\\Desktop\\Gerald\\Repos\\ICT2101-team-p3-3\\2101WebPortal\\2101WebPortal\\2101WebPortal.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\Thinkpad\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.11\\microsoft.entityframeworkcore.relational.5.0.11.nupkg.sha512",
     "C:\\Users\\Thinkpad\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\5.0.11\\microsoft.entityframeworkcore.sqlite.5.0.11.nupkg.sha512",
     "C:\\Users\\Thinkpad\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite.core\\5.0.11\\microsoft.entityframeworkcore.sqlite.core.5.0.11.nupkg.sha512",
+    "C:\\Users\\Thinkpad\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\5.0.11\\microsoft.entityframeworkcore.tools.5.0.11.nupkg.sha512",
     "C:\\Users\\Thinkpad\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\5.0.0\\microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Thinkpad\\.nuget\\packages\\microsoft.extensions.caching.memory\\5.0.0\\microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",
     "C:\\Users\\Thinkpad\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",

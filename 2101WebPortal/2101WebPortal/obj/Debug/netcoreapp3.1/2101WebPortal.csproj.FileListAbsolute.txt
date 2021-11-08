@@ -142,3 +142,9 @@ C:\Users\Thinkpad\OneDrive - Singapore Institute Of Technology\Desktop\Gerald\Re
 C:\Users\Thinkpad\OneDrive - Singapore Institute Of Technology\Desktop\Gerald\Repos\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Thinkpad\OneDrive - Singapore Institute Of Technology\Desktop\Gerald\Repos\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\Student\Challenge.cshtml.g.cs
 C:\Users\Thinkpad\OneDrive - Singapore Institute Of Technology\Desktop\Gerald\Repos\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\Student\ChallengeHistory.cshtml.g.cs
+C:\Users\Thinkpad\OneDrive - Singapore Institute Of Technology\Desktop\Gerald\Repos\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\Student\JoinSession.cshtml.g.cs
+C:\Users\Thinkpad\OneDrive - Singapore Institute Of Technology\Desktop\Gerald\Repos\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\bin\Debug\netcoreapp3.1\libman.json
+C:\Users\Thinkpad\OneDrive - Singapore Institute Of Technology\Desktop\Gerald\Repos\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\Student\Index.cshtml.g.cs
+C:\Users\Thinkpad\OneDrive - Singapore Institute Of Technology\Desktop\Gerald\Repos\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\Challenge\Create.cshtml.g.cs
+C:\Users\Thinkpad\OneDrive - Singapore Institute Of Technology\Desktop\Gerald\Repos\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\Challenge\Edit.cshtml.g.cs
+C:\Users\Thinkpad\OneDrive - Singapore Institute Of Technology\Desktop\Gerald\Repos\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\Challenge\Index.cshtml.g.cs

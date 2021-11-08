@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 
 namespace Vraze.Controllers
 {
-    public class GameSessionController : Controller
+    public class ChallengeController : Controller
     {
-        // GET: GameSessionController
+        // GET: ChallengeController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: GameSessionController/Details/5
+        // GET: ChallengeController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: GameSessionController/Create
+        // GET: ChallengeController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: GameSessionController/Create
+        // POST: ChallengeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -42,13 +42,13 @@ namespace Vraze.Controllers
             }
         }
 
-        // GET: GameSessionController/Edit/5
+        // GET: ChallengeController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: GameSessionController/Edit/5
+        // POST: ChallengeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -63,13 +63,13 @@ namespace Vraze.Controllers
             }
         }
 
-        // GET: GameSessionController/Delete/5
+        // GET: ChallengeController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: GameSessionController/Delete/5
+        // POST: ChallengeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
