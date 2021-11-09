@@ -55,18 +55,27 @@ class Server
         {
             while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
             {
-                //get any incoming data sent from the esp8266
                 string hex = BitConverter.ToString(bytes);
                 data = Encoding.ASCII.GetString(bytes, 0, i);
                 Console.WriteLine("{1}: Received: {0}", data, Thread.CurrentThread.ManagedThreadId); 
-
-                //reply if data came through. May want to replace this and put in into a function
-                // then just call the functio nto send data (the car controls) to the esp 8266
+                /*
                 string str = "Hey Device!";
                 Byte[] reply = System.Text.Encoding.ASCII.GetBytes(str);   
                 stream.Write(reply, 0, reply.Length);
-                Console.WriteLine("{1}: Sent: {0}", str, Thread.CurrentThread.ManagedThreadId);
+                Console.WriteLine("{1}: Sent: {0}", str, Thread.CurrentThread.ManagedThreadId);\
+                */
             }
+            /*
+            while(true)
+            {
+                string str;
+                Console.Write("Enter some freaking shit: ");
+                str = Console.ReadLine();
+                Byte[] reply = System.Text.Encoding.ASCII.GetBytes(str);   
+                stream.Write(reply, 0, reply.Length);
+                Console.WriteLine("{1}: Sent: {0}", str, Thread.CurrentThread.ManagedThreadId);
+            }*/
+            
         }
         catch(Exception e)
         {
