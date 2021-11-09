@@ -3,31 +3,50 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Vraze.Controllers
 {
     public class ChallengeController : Controller
     {
-        // GET: ChallengeController
+        // GET: Challenge Home Page
         public ActionResult Index()
         {
-            return View();
+            if (!User.Identity.IsAuthenticated)
+            {
+                return View("Index_Student");
+            }
+            else
+            {
+                return View();
+            }
         }
 
-        // GET: ChallengeController/Details/5
-        public ActionResult Details(int id)
+        // GET: Challenge/Edit/{id}
+        /// <summary>
+        /// This methods return the view for Editing the Challenge details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("/Challenge/Edit/{id}")]
+        public ActionResult GotoChallengeEditPage(int id)
         {
             return View();
         }
 
-        // GET: ChallengeController/Create
-        public ActionResult Create()
+        // GET: Create Challenge Page
+        public ActionResult GotoChallengeCreatePage()
         {
             return View();
         }
 
-        // POST: ChallengeController/Create
+        public ActionResult GotoStartChallengePage(int id)
+        {
+            return View("Play");
+        }
+
+        // POST: Challenge/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -40,12 +59,6 @@ namespace Vraze.Controllers
             {
                 return View();
             }
-        }
-
-        // GET: ChallengeController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
         }
 
         // POST: ChallengeController/Edit/5

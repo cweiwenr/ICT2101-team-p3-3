@@ -15,9 +15,10 @@ namespace Vraze.Models
             {
                 if (context.Facilitators.Any())
                 {
-                    return;
+                    return; //Checks if there are any data in the Facilitators table & populate the table if it is empty
                 }
 
+                //Add default system administrator account
                 context.Facilitators.AddRange(
                     new Facilitator { 
                         Username = "admin",
@@ -26,6 +27,7 @@ namespace Vraze.Models
                     }
                     );
 
+                //Save changes into database
                 context.SaveChanges();
             }
         }
