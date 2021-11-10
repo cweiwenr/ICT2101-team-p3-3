@@ -14,5 +14,7 @@ namespace Vraze.Controllers
         {
             return View("CreateSession");
         }
+
+        //have to do the create functions to store session details into database
     }
 }
