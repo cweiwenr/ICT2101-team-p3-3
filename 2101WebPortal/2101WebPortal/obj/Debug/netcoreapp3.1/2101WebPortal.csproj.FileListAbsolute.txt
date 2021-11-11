@@ -389,3 +389,6 @@ C:\Users\rcwww\Desktop\Y2T1\2101\Project\ICT2101-team-p3-3\2101WebPortal\2101Web
 C:\Users\rcwww\Desktop\Y2T1\2101\Project\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\2101WebPortal.genruntimeconfig.cache
 C:\Users\rcwww\Desktop\Y2T1\2101\Project\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\GameSession\Index.cshtml.g.cs
 C:\Users\rcwww\Desktop\Y2T1\2101\Project\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\GameSession\CreateSession.cshtml.g.cs
+C:\Users\rcwww\Desktop\Y2T1\2101\Project\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\GameSession\ModifySession.cshtml.g.cs
+C:\Users\rcwww\Desktop\Y2T1\2101\Project\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\GameSession\RemoveSession.cshtml.g.cs
+C:\Users\rcwww\Desktop\Y2T1\2101\Project\ICT2101-team-p3-3\2101WebPortal\2101WebPortal\obj\Debug\netcoreapp3.1\Razor\Views\GameSession\StartEndSession.cshtml.g.cs

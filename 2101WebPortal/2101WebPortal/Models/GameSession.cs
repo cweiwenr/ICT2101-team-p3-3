@@ -19,7 +19,7 @@ namespace Vraze.Models
         public bool IsActive { get; set; }
         public int CreatedByFacilitatorId { get; set; }
         public DateTime CreatedDate { get; set; }
-
+        [DisplayName("Student List")]
         public List<Student> StudentList { get; set; }
     }
 }
