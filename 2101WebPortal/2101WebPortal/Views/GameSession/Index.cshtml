@@ -5,15 +5,48 @@
 <div class="text-center">
     <h1 class="display-4">Session Management</h1>
 </div>
-<div class="d-inline col-sm-6">
+<div class="float-right">
     <a class="btn btn-primary btn-block" type="button" asp-area="" asp-controller="GameSession" asp-action="CreateSession">Create Session</a>
+    <br />
 </div>
-<div class="d-inline col-sm-6">
-    <a class="btn btn-primary btn-block" type="button" asp-area="" asp-controller="GameSession" asp-action="ModifySession">Modify Session</a>
-</div>
-<div class="d-inline col-sm-6">
-    <a class="btn btn-primary btn-block" type="button" asp-area="" asp-controller="GameSession" asp-action="RemoveSession">Remove Session</a>
-</div>
-<div class="d-inline col-sm-6">
-    <a class="btn btn-primary btn-block" type="button" asp-area="" asp-controller="GameSession" asp-action="StartEndSession">Start/ End Session</a>
+
+<div class="container">
+    @if(ViewBag.gamesessions != null && ViewBag.gamesessions.Count >= 1)
+    {
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Session ID</th>
+                    <th scope="col">Challenge ID</th>
+                    <!--<th scope="col">Student ID</th>-->
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach( var gamesession in ViewBag.gamesessions)
+                {
+                    <tr>
+                        <td>@gamesession.Id</td>
+                        <td>@gamesession.ChallengeId</td>
+                        <td>@if(gamesession.IsActive == false)
+                            {
+                                <a>Not Started</a>
+                            }
+                            else
+                            {
+                                <a>Started</a>
+                            }
+                        <td>
+                            <a asp-controller="GameSession" asp-action="ModifySession">Edit  </a>
+                            <a asp-controller="GameSession" asp-action="RemoveSession">  Delete  </a>
+                            <a asp-controller="GameSession" asp-action="StartEndSession">  Start</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>    
+    }
+
 </div>
