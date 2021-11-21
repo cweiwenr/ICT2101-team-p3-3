@@ -32,6 +32,7 @@ namespace Vraze.Controllers
         [Route("GameSession/RemoveSession")]
         public ActionResult RemoveSession()
         {
+
             return View("RemoveSession");
         }
 

@@ -1,9 +1,10 @@
-﻿@model Vraze.Models.WebFormDataModels.GameSessionFormDataModel
-@{ ViewData["Title"] = "Update Game Session"; }
+﻿@{
+    ViewData["Title"] = "Create New Game Session";
+}
 
 
 <div class="text-center">
-    <h1 class="display-4">Update Game Session</h1>
+    <h1 class="display-4">Add New Game Session</h1>
 </div>
 <div class="col-lg-8 mx-auto mt-3">
     <div class="card">
@@ -19,14 +20,14 @@
                 <div class="form-group row">
                     <label class="col-md-3 form-label">Access Code</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="tbAccessCode" value="@Model.AccessCode" required>
+                        <input type="text" class="form-control" id="tbAccessCode" required>
                         <div id="tbAccessCodeFeedback" class="custom-feedback-msg"></div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 form-label">Challenges</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="tbChallengeList" value="@Model.ChallengeList" required>
+                        <input type="text" class="form-control" id="tbChallengeList" required>
                         <small id="challengeListHelp" class="form-text text-muted">Please separate each challenge ID by ';'.</small>
                         <div id="tbChallengeListFeedback" class="custom-feedback-msg"></div>
                     </div>
@@ -43,14 +44,6 @@
                                 </tr>
                             </thead>
                             <tbody id="studentListTable">
-                                @foreach (var student in Model.StudentList)
-                                {
-                                <tr class="studentRow">
-                                    <td><input type="text" class="form-control tbStudentId" value="@student.StudentId" /></td>
-                                    <td><input type="text" class="form-control tbStudentId" value="@student.Name" /></td>
-                                    <td><span class="btn btn-danger btn-sm btnRemoveStudRow" onclick="RemoveStudentRow(this)">Remove</span></td>
-                                </tr>
-                                }
                             </tbody>
                         </table>
                         <span class="btn btn-info btn-block" id="btnAddNewStudentRow">Add New Student</span>
@@ -64,7 +57,7 @@
                         <a asp-action="Index" asp-controller="GameSession" id="btnBack" class="btn btn-success btn-block"><i class="fas fa-sign-out-alt"></i> Back</a>
                     </div>
                     <div class="col-md-6">
-                        <button id="btnSubmit" class="btn btn-primary btn-block">Update</button>
+                        <button id="btnSubmit" class="btn btn-primary btn-block">Create</button>
                     </div>
                 </div>
             </form>
@@ -195,13 +188,12 @@
 
                 //Sending the json to the /GameSession/Create API to add the game session into the database
                 $.ajax({
-                    url: "/GameSession/update/@ViewData["GameSessionId"].ToString()",
+                    url: "/GameSession/create",
                     type: "POST",
                     dataType: "json",
                     contentType: "application/json",
                     data: webFormDataInString,
                     success: function (response) {
-                        console.log(response);
                         if (response["status"] == 404) {
                             $('#errorMsgAlert').removeClass('d-none');
                             $("#errorMsgAlert").text(response["message"]);

@@ -1,52 +1,66 @@
-﻿@{
-    ViewData["Title"] = "Session Management Page";
-}
+﻿@model IEnumerable<Vraze.Models.GameSession>
+@{ ViewData["Title"] = "Session Management Page"; }
 
-<div class="text-center">
-    <h1 class="display-4">Session Management</h1>
+<div class="text-left">
+    <h1 class="display-4">Challenge Management</h1>
 </div>
-<div class="float-right">
-    <a class="btn btn-primary btn-block" type="button" asp-area="" asp-controller="GameSession" asp-action="CreateSession">Create Session</a>
-    <br />
+<div class="d-flex flex-row-reverse mb-2">
+    <a class="btn btn-info" asp-action="Create" asp-controller="GameSession">Add New Game Session</a>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Game Session Id</th>
+                <th scope="col">Access Code</th>
+                <th scope="col">Challenges</th>
+                <th scope="col">Student List</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.AccessCode</td>
+                <td>@item.ChallengeList</td>
+                <td>@item.StudentList</td>
+                <td><a asp-action="Edit" asp-route-id="@item.Id" class="card-link">Edit</a><span id="btnDelete" data-content="@item.Id" class="btn btn-info">Remove</span></td>
+            </tr>
+       }
+        </tbody>
+    </table>
 </div>
 
-<div class="container">
-    @if(ViewBag.gamesessions != null && ViewBag.gamesessions.Count >= 1)
-    {
+@*<script>$(document).ready(function () {
+        $("#btnDelete").click(function () {
+            console.log($(this).attr('data-content'));
+            var apiUri = './Delete/' + $(this).attr('data-content');
+            var messagePopupTitle = 'Are you sure you want to delete the Challenge with ID:' + $(this).attr('data-content');
 
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Session ID</th>
-                    <th scope="col">Challenge ID</th>
-                    <!--<th scope="col">Student ID</th>-->
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach( var gamesession in ViewBag.gamesessions)
-                {
-                    <tr>
-                        <td>@gamesession.Id</td>
-                        <td>@gamesession.ChallengeId</td>
-                        <td>@if(gamesession.IsActive == false)
-                            {
-                                <a>Not Started</a>
+            Swal.fire({
+                title: messagePopupTitle,
+                showCancelButton: true,
+                cancelButtonText: 'No',
+                confirmButtonText: 'Yes',
+                showLoaderOnConfirm: true,
+                preConfirm: (login) => {
+                    return fetch(apiUri)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(response.statusText)
                             }
-                            else
-                            {
-                                <a>Started</a>
-                            }
-                        <td>
-                            <a asp-controller="GameSession" asp-action="ModifySession">Edit  </a>
-                            <a asp-controller="GameSession" asp-action="RemoveSession">  Delete  </a>
-                            <a asp-controller="GameSession" asp-action="StartEndSession">  Start</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>    
-    }
-
-</div>
+                            console.log("respone: ", response);
+                            location.replace('/Challenge/Manage');
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                                `Request failed: ${error}`
+                            )
+                        })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            });
+        });
+    });</script>*@
