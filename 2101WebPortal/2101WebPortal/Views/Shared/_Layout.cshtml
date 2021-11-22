@@ -5,7 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Vraze</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/brands.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/fontawesome.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/regular.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/solid.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/svg-with-js.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.10/dist/sweetalert2.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.10/dist/sweetalert2.all.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
 </head>
 <body>
     <header>
@@ -16,9 +29,9 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (!User.Identity.IsAuthenticated)
+                        @if (!ViewData.ContainsKey("role"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -26,31 +39,40 @@
                         }
                         else
                         {
-                            @if (ViewData["role"] == "Admin")
+                            @if (ViewData["role"].ToString() == "Admin")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Home">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Account</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Manage">Facilitators</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Session</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="GameSession" asp-action="Manage">Session</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Challenge</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Challenge" asp-action="Manage">Challenge</a>
                                 </li>
                             }
-                            else if (ViewData["role"] == "Facilitator")
+                            else if (ViewData["role"].ToString() == "Facilitator")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Home">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Session</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="GameSession" asp-action="Manage">Session</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Challenge</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Challenge" asp-action="Manage">Challenge</a>
+                                </li>
+                            }
+                            else if (ViewData["role"].ToString() == "Student")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ChallengeHistory" asp-action="Index">Challenge History</a>
                                 </li>
                             }
                             else
@@ -58,15 +80,22 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Challenge</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Challenge History</a>
-                                </li>
                             }
                         }
                     </ul>
+                    @if (ViewData.ContainsKey("role"))
+                    {
+                        <ul class="navbar-nav">
+                            @if (ViewData["role"].ToString() == "Student")
+                            {
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Logout">Log out</a></li>
+                            }
+                            else if (ViewData["role"].ToString() == "Admin" || ViewData["role"].ToString() == "Facilitator")
+                            {
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Logout">Log out</a></li>
+                            }
+                        </ul>
+                    }
                 </div>
             </div>
         </nav>
@@ -79,12 +108,8 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - Vraze - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - Vraze
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
 </body>
 </html>
