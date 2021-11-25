@@ -4,39 +4,104 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Vraze.Models;
 
 namespace Vraze.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin/Home
+        private readonly ApplicationDbContext _context;
+
+        public AdminController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         [Route("Admin/Home")]
         public ActionResult Index()
         {
-            //if (!User.Identity.IsAuthenticated)
-            //    return RedirectToAction(nameof(LoginView));
-            //else
-                return View();
+            var roleCookie = this.HttpContext.Request.Cookies["role"]; //Get the role of the user from the request's cookie
+
+            //If the user has not logged in (no cookie found) or if the user is not privilleged, return them to the Admin's login page.
+            if (string.IsNullOrEmpty(roleCookie) && (roleCookie != "Admin" || roleCookie != "Facilitator"))
+            {
+                return View("Login");
+            }
+            else //If the user is privilleged, redirect the user to the Admin's dashboard.
+            {
+                ViewData["role"] = roleCookie.ToString();
+                return View("Index");
+            }
         }
 
         [Route("Admin/Login")]
-        public ActionResult LoginView()
+        [HttpGet]
+        public ActionResult Login()
         {
+            // Clear all cookies when returning back to login page to prevent unauthorised visit to other pages
+            Response.Cookies.Delete("role");
+            Response.Cookies.Delete("accessCode");
+            Response.Cookies.Delete("facilitatorId");
+            Response.Cookies.Delete("studentId");
+            Response.Cookies.Delete("accessCode");
+            ViewData.Remove("role");
+
             return View("Login");
         }
 
-        // GET: Admin/Challenge/Manage/
-        [Route("Admin/Challenge/Manage")]
-        public ActionResult ManageChallengeView()
+        [Route("Admin/Login")]
+        [HttpPost]
+        public IActionResult Login([Bind("Username", "PasswordHash")]Facilitator model)
         {
-            return View("Challenge_Admin");
+            // Clear all cookies when returning back to login page to prevent unauthorised visit to other pages
+            Response.Cookies.Delete("role");
+            Response.Cookies.Delete("accessCode");
+            Response.Cookies.Delete("facilitatorId");
+            Response.Cookies.Delete("studentId");
+            Response.Cookies.Delete("accessCode");
+            ViewData.Remove("role");
+
+            var user = _context.Facilitators.Where(f => f.Username == model.Username).FirstOrDefault();
+
+            if (user == null)
+            {
+                ViewData["message"] = "You have entered an invalid username/password. Please try again.";
+                return View("Login");
+            }
+
+            if (BCrypt.Net.BCrypt.Verify(model.PasswordHash, user.PasswordHash))
+            {
+                CookieOptions option = new CookieOptions();
+
+                option.Expires = DateTime.Now.AddMinutes(180);
+
+                Response.Cookies.Append("role", (user.IsSystemAdmin) ? "Admin" : "Facilitator", option);
+                Response.Cookies.Append("facilitatorId", user.Id.ToString(), option);
+
+                ViewData["role"] = (user.IsSystemAdmin) ? "Admin" : "Facilitator";
+
+                return RedirectToAction("Index", "Admin");
+            }
+            else
+            {
+                ViewData["message"] = "You have entered an invalid username/password. Please try again.";
+                return View("Login");
+            }
         }
 
-        // GET: Admin/Challenge/Manage/1
-        [Route("Admin/Challenge/Manage/{id}")]
-        public ActionResult ManageChallengeView(int id)
+        [Route("Admin/Logout")]
+        [HttpGet]
+        public IActionResult Logout()
         {
-            return View("Challenge_Admin");
+            // Clear all cookies when returning back to login page to prevent unauthorised visit to other pages
+            Response.Cookies.Delete("role");
+            Response.Cookies.Delete("accessCode");
+            Response.Cookies.Delete("facilitatorId");
+            Response.Cookies.Delete("studentId");
+            Response.Cookies.Delete("accessCode");
+            ViewData.Remove("role");
+
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: AdminController/Create
