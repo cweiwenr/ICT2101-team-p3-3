@@ -107,5 +107,38 @@ namespace Vraze.Controllers
                 return View("JoinSession");
             }
         }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            // Clear all cookies when returning back to home page to prevent unauthorised visit to other pages
+            Response.Cookies.Delete("role");
+            Response.Cookies.Delete("accessCode");
+            Response.Cookies.Delete("facilitatorId");
+            Response.Cookies.Delete("studentId");
+            Response.Cookies.Delete("accessCode");
+            ViewData.Remove("role");
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Route("/Student/Play/{challengeId}")]
+        public IActionResult Play(int challengeId)
+        {
+            var userRole = this.HttpContext.Request.Cookies["role"]; // Get the user's role stored in the cookie within the web browser
+
+            // Get the challenge with the challengeId from the database
+            var challenge = _context.Challenges.FirstOrDefault(challenge => challenge.ChallengeId == challengeId);
+
+            if (challenge == null)
+            {
+                return RedirectToAction("Index", "Student"); //If the challenge does not exist, redirect user back to the dashboard
+            }
+
+            ViewData["role"] = userRole.ToString();
+
+            return View("Play", challenge);
+        }
     }
 }
