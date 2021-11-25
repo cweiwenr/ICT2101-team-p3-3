@@ -1,3 +1,7 @@
+2101WebPortal/.vs/
+2101WebPortal/2101WebPortal/obj/
+2101WebPortal/2101WebPortal/VrazeDatabase.db
+obj
 ###################
 # compiled source #
 ###################
@@ -73,3 +77,4 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+.DS_Store
