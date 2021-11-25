@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\WebFormDataModels\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
