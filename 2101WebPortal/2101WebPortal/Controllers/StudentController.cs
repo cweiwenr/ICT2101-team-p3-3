@@ -52,12 +52,60 @@ namespace Vraze.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         [Route("/Student/Join")]
-        public ActionResult JoinSession(IFormCollection collection)
+        public IActionResult Join()
         {
-            return View("");
+            // Clear all cookies when returning back to login page to prevent unauthorised visit to other pages
+            Response.Cookies.Delete("role");
+            Response.Cookies.Delete("accessCode");
+            Response.Cookies.Delete("facilitatorId");
+            Response.Cookies.Delete("studentId");
+            Response.Cookies.Delete("accessCode");
+            ViewData.Remove("role");
+
+            return View("JoinSession");
+        }
+
+        [HttpPost]
+        public IActionResult JoinSession(IFormCollection studentJoinInfo)
+        {
+            var session = _context.GameSessions.FirstOrDefault(g => g.AccessCode == studentJoinInfo["AccessCode"].ToString().ToUpper());
+
+            if (session == null)
+            {
+                ViewData["message"] = "The game session you are trying to join does not exist.";
+                return View("JoinSession");
+            }
+
+            if (session.IsActive)
+            {
+                var studentList = session.StudentList.Split(';').ToList();
+
+                if (studentList.IndexOf(studentJoinInfo["StudentId"].ToString()) != -1)
+                {
+                    CookieOptions option = new CookieOptions();
+
+                    option.Expires = DateTime.Now.AddMinutes(180);
+
+                    Response.Cookies.Append("role", "Student", option);
+                    Response.Cookies.Append("studentId", studentJoinInfo["StudentId"].ToString(), option);
+                    Response.Cookies.Append("accessCode", session.AccessCode, option);
+
+                    ViewData["role"] = "Student";
+                    return RedirectToAction("Index", "Student");
+                }
+                else
+                {
+                    ViewData["message"] = "You do not have access to join this session, please ask your facilitator to grant you access";
+                    return View("JoinSession");
+                }
+            }
+            else
+            {
+                ViewData["message"] = "The session you are trying to join has not been started by the facilitator.";
+                return View("JoinSession");
+            }
         }
     }
 }
