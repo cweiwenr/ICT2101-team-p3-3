@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Dashboard";
 }
+<div class="text-center">
+    <h1 class="display-4">Challenges</h1>
+</div>
+<div class="row pl-5 ml-1">
+    <div class="card-deck">
+        @foreach (Challenge challenge in (IEnumerable<Challenge>)(ViewData["Challenges"]))
+        {
+            var challengeHistoryList = (IEnumerable<ChallengeHistory>)ViewData["ChallengeHistory"];
+            var currentHistory = challengeHistoryList.FirstOrDefault(history => history.ChallengeId == challenge.ChallengeId);
+            var pointsScored = (currentHistory != null) ? currentHistory.Points : 0;
+
+            <div class="card mb-4" style="min-width: 20rem; max-width: 20rem;">
+                <img src="/img/testChallenge.png" class="card-img-top" alt="..." width="200">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-8">
+                            <h5 class="card-title" style="color: #2962FF">Challenge @challenge.ChallengeId</h5>
+                        </div>
+                        <!--Status of the challenge, completed or not completed-->
+                        <div class="col-4 text-right">
+                            @if (pointsScored >= 5)
+                            {
+                                <span class="badge badge-success">Cleared</span>
+                            }
+                            else if (pointsScored < 5)
+                            {
+                                <span class="badge badge-secondary">Not cleared</span>
+                            }
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        }
+    </div>
+</div>
