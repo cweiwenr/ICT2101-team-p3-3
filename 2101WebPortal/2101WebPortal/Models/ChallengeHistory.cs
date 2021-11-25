@@ -13,5 +13,11 @@ namespace Vraze.Models
         public int StudentId { get; set; }
         public string Solution { get; set; }
         public int Points { get; set; }
+        public double ? CarSpeed { get; set; }
+        public double ? CarDistanceTravelled { get; set; }
+
+        public Challenge Challenge { get; set; }
+        public Student Student { get; set; }
+        public GameSession Session { get; set;}
     }
 }
