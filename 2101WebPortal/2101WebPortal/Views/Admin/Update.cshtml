@@ -94,7 +94,7 @@
                 var webFormDataInString = JSON.stringify(webFormData);
 
                 $.ajax({
-                    url: "/admin/update/@Model.Id",
+                    url: "/admin/update/@Model.FacilitatorId",
                     type: "POST",
                     dataType: "json",
                     contentType: "application/json",
