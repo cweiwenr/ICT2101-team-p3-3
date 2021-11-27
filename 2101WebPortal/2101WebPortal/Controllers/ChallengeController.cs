@@ -120,6 +120,13 @@ namespace Vraze.Controllers
                         IsDeleted = false
                     };
 
+                    if (string.IsNullOrEmpty(challengeInfo.MapImageUrl) || string.IsNullOrEmpty(challengeInfo.Solution))
+                    {
+                        var errorResponseObj = new { message = "Unable to add challenge due to blanks in some fields. Please check" };
+
+                        return BadRequest(errorResponseObj);
+                    }
+
                     await _context.Challenges.AddAsync(challenge);
                     _context.SaveChanges();
 
@@ -142,7 +149,7 @@ namespace Vraze.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.ToString() });
+                return BadRequest(new { message = "There was an error trying to add this challenge, please contact the system administrator." });
             }
         }
 
@@ -165,6 +172,13 @@ namespace Vraze.Controllers
                         return BadRequest(new { message = "Challenge does not exist" });
                     }
 
+                    if (string.IsNullOrEmpty(challengeInfo.MapImageUrl) || string.IsNullOrEmpty(challengeInfo.Solution))
+                    {
+                        var errorResponseObj = new { message = "Unable to update challenge due to blanks in some fields. Please check" };
+
+                        return BadRequest(errorResponseObj);
+                    }
+
                     challenge.IsTutorialChallenge = Convert.ToBoolean(challengeInfo.IsTutorialChallenge);
                     challenge.Solution = challengeInfo.Solution;
                     challenge.MapImageUrl = challengeInfo.MapImageUrl;
@@ -174,9 +188,9 @@ namespace Vraze.Controllers
 
                     var hints = await _context.Hints.Where(h => h.ChallengeId == challenge.ChallengeId).ToListAsync();
 
-                    if (hints == null)
+                    if (hints.Count() <= 0)
                     {
-                        return BadRequest(new { message = "Challenge does not exist" });
+                        return BadRequest(new { message = "Unable to update Hints of this challenge as there were no hints found." });
                     }
                     int i = 0;
                     foreach (var hint in hints)
@@ -195,7 +209,7 @@ namespace Vraze.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.ToString() });
+                return BadRequest(new { message = "There was an error trying to update this challenge, please contact the system administrator." });
             }
         }
 
@@ -211,12 +225,14 @@ namespace Vraze.Controllers
                 _context.Challenges.Update(challenge);
                 _context.SaveChanges();
 
-                return Ok();
+                string customMessage = "Successfully deleted challenge.";
+
+                return Ok(new { statusCode = 200, message = customMessage });
             }
             catch (Exception ex)
             {
                 var errorResponseObj = new {
-                    message = ex.Message
+                    message = "There was an error trying to delete this challenge, please contact the system administrator."
                 };
 
                 return BadRequest(errorResponseObj);
@@ -235,13 +251,15 @@ namespace Vraze.Controllers
                 _context.Challenges.Update(challenge);
                 _context.SaveChanges();
 
-                return Ok();
+                string customMessage = "Successfully restored challenge.";
+
+                return Ok(new { statusCode = 200, message = customMessage });
             }
             catch (Exception ex)
             {
                 var errorResponseObj = new
                 {
-                    message = ex.Message
+                    message = "There was an error trying to restore this challenge, please contact the system administrator."
                 };
 
                 return BadRequest(errorResponseObj);
