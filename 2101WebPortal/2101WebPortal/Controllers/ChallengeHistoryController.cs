@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Vraze.Models;
@@ -41,10 +42,39 @@ namespace Vraze.Controllers
             else
             {
                 var session = _context.GameSessions.FirstOrDefault(session => session.AccessCode == accessCode);
-                var challengeHistoryList = _context.ChallengeHistories.Include(history => history.Challenge).Include(history => history.Challenge.Hints).Where(history => history.ChallengeId == challengeId && history.SessionId == session.Id && history.StudentId == studentId).ToList();
+                var challengeHistoryList = _context.ChallengeHistories.Include(history => history.Challenge).Include(history => history.Challenge.Hints).Where(history => history.ChallengeId == challengeId && history.SessionId == session.SessionId && history.StudentId == studentId).ToList();
 
                 ViewData["role"] = userRole.ToString();
                 return View("View", challengeHistoryList);
+            }
+        }
+
+        [HttpGet]
+        [Route("/Car/Update")]
+        public IActionResult Update(IFormCollection data)
+        {
+            try
+            {
+                int challengeHistoryId = int.Parse(data["historyId"]);
+
+                var currentChallengeHistory = _context.ChallengeHistories.FirstOrDefault(history => history.ChallengeHistoryId == challengeHistoryId);
+
+                if (currentChallengeHistory == null)
+                {
+                    return BadRequest();
+                }
+
+                currentChallengeHistory.CarDistanceTravelled = double.Parse(data["distance"]);
+                currentChallengeHistory.CarSpeed = double.Parse(data["speed"]);
+
+                _context.ChallengeHistories.Update(currentChallengeHistory);
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
             }
         }
     }
