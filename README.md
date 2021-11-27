@@ -38,7 +38,7 @@ Below are some data that have been seeded into the database for demostration pur
 | 2001893    | Reuben                   |
 | 2000652    | Zhong Yi                 |
 | 2002453    | Sneha                    |
-| 2000995    | Merreill                 |
+| 2000995    | Merrill                  |
 
 ### Game Sessions
 | Game Session ID | Access Code | Students Permitted                          | Is Active | Challenges |
