@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewData["Title"] = "Dashboard";
 }
 <div class="text-center">
@@ -13,7 +13,7 @@
             {
                 var challengeHistoryList = (IEnumerable<ChallengeHistory>)ViewData["ChallengeHistory"];
                 var currentHistory = (challengeHistoryList != null && challengeHistoryList.Count() > 0) ? challengeHistoryList.Where(history => history.ChallengeId == challenge.ChallengeId) : null;
-                var pointsScored = (currentHistory.Count() > 0) ? currentHistory.Max(history => history.Points) : 0;
+                var pointsScored = (currentHistory != null && currentHistory.Count() > 0) ? currentHistory.Max(history => history.Points) : 0;
 
                 <div class="card mb-4" style="min-width: 20rem; max-width: 20rem;">
                     <img src="@challenge.MapImageUrl" class="card-img-top" alt="..." width="200">

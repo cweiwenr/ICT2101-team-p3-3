@@ -20,11 +20,13 @@ namespace Vraze.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
+            Response.Cookies.Delete("role");
+            Response.Cookies.Delete("accessCode");
+            Response.Cookies.Delete("facilitatorId");
+            Response.Cookies.Delete("studentId");
+            Response.Cookies.Delete("accessCode");
+            ViewData.Remove("role");
 
-        public IActionResult Privacy()
-        {
             return View();
         }
 

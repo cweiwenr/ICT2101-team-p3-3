@@ -39,19 +39,32 @@
                     <div id="@collapseIdStr" class="collapse" aria-labelledby="@collapseHeadingIdStr" data-parent="#challengeHistoryContainer">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4">Map</div>
+                                <div class="col-md-4 font-weight-bold">Map</div>
                                 <div class="col-md-8"><img src="@challengeHistory.Challenge.MapImageUrl" alt="" height="150" /></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">Points</div>
+                                <div class="col-md-4 font-weight-bold">Points</div>
                                 <div class="col-md-8">@challengeHistory.Points</div>
                             </div>
+                            @{
+                                var studentAnswer = challengeHistory.Solution.Replace("F", "Forward, ").Replace("R", "Turn Right, ").Replace("L", "Turn Left, ").Replace("B", "Backward, ");
+                            }
                             <div class="row">
-                                <div class="col-md-4">Solution</div>
-                                <div class="col-md-8">@challengeHistory.Solution</div>
+                                <div class="col-md-4 font-weight-bold">Your Solution</div>
+                                <div class="col-md-8">@studentAnswer.Substring(0, studentAnswer.Length-2)</div>
                             </div>
+                            @{
+                                var solution = challengeHistory.Challenge.Solution.Replace("F", "Forward, ").Replace("R", "Turn Right, ").Replace("L", "Turn Left, ").Replace("B", "Backward, ");
+                            }
+                            @if (hintCount >= 3)
+                            {
+                                <div class="row">
+                                    <div class="col-md-4 font-weight-bold">Challenge Solution</div>
+                                    <div class="col-md-8">@solution.Substring(0, solution.Length - 2)</div>
+                                </div>
+                            }
                             <div class="row">
-                                <div class="col-md-4">Hints</div>
+                                <div class="col-md-4 font-weight-bold">Hints</div>
                                 <div class="col-md-8">
                                     <ol class="pl-3">
                                         @for (int j = 0; j < hintCount; j++)
@@ -62,11 +75,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">Car Distance Travelled</div>
+                                <div class="col-md-4 font-weight-bold">Car Distance Travelled</div>
                                 <div class="col-md-8">@challengeHistory.CarDistanceTravelled</div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">Car Spped</div>
+                                <div class="col-md-4 font-weight-bold">Car Spped</div>
                                 <div class="col-md-8">@challengeHistory.CarSpeed</div>
                             </div>
                         </div>
