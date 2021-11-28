@@ -43,7 +43,6 @@ namespace Vraze.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
         }
 
         [Route("/Challenge/Manage")]
