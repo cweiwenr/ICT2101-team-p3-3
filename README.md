@@ -58,12 +58,25 @@ Below are some data that have been seeded into the database for demostration pur
 >>> + Merge PR and handle conflicts
 >> + PR to Main for final prototype release
 # User Acceptance Testing
+The team conducted UAT on the complete system. The state diagram and ise case diagrams has been updated as shown. 
+
+### UAT Test Demo
+[![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108311/uat_zkl3v5.png)](https://www.youtube.com/watch?v=kCtZK9qRJxc "ICT2x01 team3-p3 UAT")
 
 # White Box Testing
 The team decided to conduct unit testing on the `ChallengeController` class using the built-in testing framework, XUnit offered with Visual Studio IDE. This is because the `ChallengeController` is required to interact with the Database Context class and the Model class to perform create, update and delete operations.
 
 ### Unit Test Demo
 [![WBTestImagePreview](https://res.cloudinary.com/dj6afbyih/image/upload/v1638017614/ict1004/Screenshot_2021-11-27_at_20.53.09_kdpfxz.png)](https://www.youtube.com/watch?v=X7RzZ7VLnlQ "ICT2X01 P3-3 White Box Testing")
+
+# Updated Diagrams
+The team has updated the diagrams from the M2 report.
+
+### Use Case Diagram
+[![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108353/M2_-_use_case_diagram_llqutc.png)]
+
+### Full System State Diagram
+[![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108358/newest_state_-_Copy_of_Copy_of_Page_1_1_rfu02u.png)]
 
 ### Unit Test Statistics
 
