@@ -5,6 +5,19 @@
 <div class="text-center">
     <h1 class="display-4">Update Game Session</h1>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <h6>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="Home">Home</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="GameSession" asp-action="Manage">Game Session</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Game Session</li>
+                </ol>
+            </nav>
+        </h6>
+    </div>
+</div>
 <div class="col-lg-8 mx-auto mt-3">
     <div class="card">
         <div class="card-body">
@@ -207,7 +220,7 @@
                             $("#errorMsgAlert").text(response["message"]);
                         }
                         else {
-                            location.replace('/GameSession/Index');
+                            location.replace('/GameSession/Manage');
                         }
                     },
                     error: function (error) { console.log(error); }
