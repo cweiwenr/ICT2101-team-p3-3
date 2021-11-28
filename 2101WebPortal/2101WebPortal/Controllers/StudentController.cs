@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -18,6 +18,11 @@ namespace Vraze.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        public StudentController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             var userRole = this.HttpContext.Request.Cookies["role"]; // Get the user's role stored in the cookie within the web browser
@@ -31,6 +36,7 @@ namespace Vraze.Controllers
             {
                 ViewData["role"] = userRole.ToString();
 
+                var studentId = int.Parse(HttpContext.Request.Cookies["studentId"].ToString());
                 var accessCode = HttpContext.Request.Cookies["accessCode"].ToString().ToUpper();
                 var session = _context.GameSessions.FirstOrDefault(session => session.AccessCode == accessCode);
                 var challengeIDList = (!string.IsNullOrEmpty(session.ChallengeList)) ? session.ChallengeList.Split(';').Select(int.Parse).ToList() : new List<int>();
@@ -47,7 +53,7 @@ namespace Vraze.Controllers
                 }
 
                 ViewData["challenges"] = challengeList;
-                ViewData["challengeHistory"] = _context.ChallengeHistories;
+                ViewData["challengeHistory"] = _context.ChallengeHistories.Where(history => history.StudentId == studentId);
                 return View("index", challengeList);
             }
         }
@@ -68,6 +74,7 @@ namespace Vraze.Controllers
         }
 
         [HttpPost]
+        [Route("/Student/Join")]
         public IActionResult JoinSession(IFormCollection studentJoinInfo)
         {
             var session = _context.GameSessions.FirstOrDefault(g => g.AccessCode == studentJoinInfo["AccessCode"].ToString().ToUpper());
@@ -139,6 +146,144 @@ namespace Vraze.Controllers
             ViewData["role"] = userRole.ToString();
 
             return View("Play", challenge);
+        }
+
+        [HttpPost]
+        [Route("/Student/SubmitCarCommand/{challengeId}")]
+        public async Task<IActionResult> SubmitSolution(int challengeId)
+        {
+            try
+            {
+                using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
+                {
+                    string json = await reader.ReadToEndAsync();
+
+                    // Gets the current student information from the database
+                    var studentId = int.Parse(HttpContext.Request.Cookies["studentId"].ToString());
+                    var student = _context.Students.FirstOrDefault(stud => stud.StudentId == studentId);
+
+                    // Gets the current game session information fromt the database
+                    var accessCode = HttpContext.Request.Cookies["accessCode"].ToString().ToUpper();
+                    var session = _context.GameSessions.FirstOrDefault(session => session.AccessCode == accessCode);
+
+                    // Get the challenge with the challengeId from the database
+                    var challenge = _context.Challenges.Include(challenge => challenge.Hints).FirstOrDefault(challenge => challenge.ChallengeId == challengeId);
+
+                    // Get the student's challenge history for the challenge he/she is attempting right now
+                    var challengeHistory = _context.ChallengeHistories.Where(history => history.ChallengeId == challengeId && history.SessionId == session.SessionId && history.StudentId == student.StudentId);
+
+                    // Convert the json string back to the SendCarCommandDataModel
+                    var webFormData = JsonConvert.DeserializeObject<SendCarCommandDataModel>(json);
+
+                    if (challenge == null)
+                    {
+                        return RedirectToAction("Index", "Student"); //If the challenge does not exist, redirect user back to the dashboard
+                    }
+
+                    string challengeSolution = challenge.Solution;
+                    bool isCorrectSolution = false;
+                    int points = 0;
+
+                    // Points Calculation
+                    if (webFormData.CarCommand.ToUpper() == challengeSolution)
+                    {
+                        points = 10; // Full points for correct answer
+                        isCorrectSolution = true;
+                    } else if (webFormData.CarCommand.Length == challengeSolution.Length)
+                    {
+                        points = 1;
+
+                        foreach (char c in webFormData.CarCommand.ToUpper().ToCharArray())
+                        {
+                            int count = challengeSolution.Count(f => f == c);
+
+                            if (count > 0) // If there is a command in the Student's solution that matches the Correct Solution, we will give them a point if the current points calculated is less than 7. So the max points they can score for not getting the correct answer is 6 out of 10.
+                            {
+                                points += (points < 7) ? 1 : 0;
+                            }
+                        }
+                    }
+                    else // Totally wrong answer
+                    {
+                        points = 0;
+                    }
+
+                    // Prepare the Challenge History Object to be added into the database
+                    var newChallengeHistory = new ChallengeHistory();
+                    newChallengeHistory.Points = points;
+                    newChallengeHistory.SessionId = session.SessionId;
+                    newChallengeHistory.ChallengeId = challenge.ChallengeId;
+                    newChallengeHistory.StudentId = student.StudentId;
+                    newChallengeHistory.Solution = webFormData.CarCommand.ToUpper();
+
+                    // Add the student's challenge history into the database
+                    _context.Add(newChallengeHistory);
+                    _context.SaveChanges();
+
+                    //If the student's solution match the solution of the challenge provided by the facilitator, send the commands to the car
+                    if (isCorrectSolution)
+                    {
+                        /**
+                         * To Add Coversion of Blocky comamnds to simplified commands to the car
+                         **/
+                        string simplifiedCommands = $"W{newChallengeHistory.ChallengeHistoryId:D2}{challenge.Solution}";
+
+                        // Start of sending car commands to the robot car
+                        using (TcpClient socket = new TcpClient("192.168.86.81", 8080))
+                        {
+                            while (socket.Connected)
+                            {
+                                using (NetworkStream stream = socket.GetStream())
+                                {
+                                    byte[] data = System.Text.Encoding.ASCII.GetBytes(simplifiedCommands);
+                                    stream.Write(data, 0, data.Length);
+                                    stream.Close();
+                                }
+                            }
+
+                            socket.Close();
+                        }
+                        // End of sending car commands to the robot car
+
+                        var responseObject = new
+                        {
+                            Points = points,
+                            Status = "Correct",
+                            Message = "Congratulation, you manage to solve this challenge! Take a look at how car move according to your solution!",
+                            Hints = ""
+                        };
+
+                        return Ok(responseObject);
+                    }
+                    else
+                    {
+                        var hintsForStudent = new List<string>();
+                        var hints = challenge.Hints.ToList();
+                        int hintCount = (challengeHistory.Count() > 3) ? 3 : challengeHistory.Count();
+                        for (int i = 0; i < hintCount; i++)
+                        {
+                            hintsForStudent.Add(hints[i].HintInformation);
+                        }
+
+                        var responseObject = new
+                        {
+                            Points = points,
+                            Status = "Incorrect",
+                            Message = "Your solution is incorrect.",
+                            Hints = hintsForStudent
+                        };
+
+                        return Ok(responseObject);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var responseObject = new {
+                    Message = "There was an error when trying to send the car commands to the robot car. Please contact the administrators!"
+                };
+                return BadRequest(responseObject);
+            }
         }
     }
 }
