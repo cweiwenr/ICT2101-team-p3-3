@@ -73,13 +73,19 @@ The team decided to conduct unit testing on the `ChallengeController` class usin
 The team has updated the diagrams from the M2 report.
 
 ### Use Case Diagram
-[![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108353/M2_-_use_case_diagram_llqutc.png)]
+![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108353/M2_-_use_case_diagram_llqutc.png)
 
 ### Full System State Diagram
-[![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108358/newest_state_-_Copy_of_Copy_of_Page_1_1_rfu02u.png)]
+![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108358/newest_state_-_Copy_of_Copy_of_Page_1_1_rfu02u.png)
 
 ### Unit Test Statistics
 
 ### Test Cases
 | S/N | Test Name                                                               | Method Being Tested | Expected Outcome |
-| --- | ----------------------------------------------------------------------- | ------------------- | ---------------- |
+| L01 | Select facilitator user type | ------------------- | ---------------- |
+
+### Unit Test Cases
+![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108358/newest_state_-_Copy_of_Copy_of_Page_1_1_rfu02u.png)
+![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638109160/studentplay_x2meji.png)
+![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638109161/challengemanagement_pklxmw.png)
+![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638109173/managegamesession_ryiiml.png)
