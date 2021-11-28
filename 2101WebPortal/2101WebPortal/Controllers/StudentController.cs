@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -218,6 +218,14 @@ namespace Vraze.Controllers
 
                     // Add the student's challenge history into the database
                     _context.Add(newChallengeHistory);
+
+                    // Update the student's has completed tutorial challenge flag
+                    student.HasCompletedTutorial = challenge.IsTutorialChallenge;
+
+                    // Update student completed tutorial flag
+                    _context.Students.Update(student);
+
+                    // Save Changes into Database
                     _context.SaveChanges();
 
                     //If the student's solution match the solution of the challenge provided by the facilitator, send the commands to the car
@@ -229,20 +237,20 @@ namespace Vraze.Controllers
                         string simplifiedCommands = $"W{newChallengeHistory.ChallengeHistoryId:D2}{challenge.Solution}";
 
                         // Start of sending car commands to the robot car
-                        using (TcpClient socket = new TcpClient("192.168.86.81", 8080))
-                        {
-                            while (socket.Connected)
-                            {
-                                using (NetworkStream stream = socket.GetStream())
-                                {
-                                    byte[] data = System.Text.Encoding.ASCII.GetBytes(simplifiedCommands);
-                                    stream.Write(data, 0, data.Length);
-                                    stream.Close();
-                                }
-                            }
+                        //using (TcpClient socket = new TcpClient("192.168.86.81", 8080))
+                        //{
+                        //    while (socket.Connected)
+                        //    {
+                        //        using (NetworkStream stream = socket.GetStream())
+                        //        {
+                        //            byte[] data = System.Text.Encoding.ASCII.GetBytes(simplifiedCommands);
+                        //            stream.Write(data, 0, data.Length);
+                        //            stream.Close();
+                        //        }
+                        //    }
 
-                            socket.Close();
-                        }
+                        //    socket.Close();
+                        //}
                         // End of sending car commands to the robot car
 
                         var responseObject = new
@@ -269,7 +277,7 @@ namespace Vraze.Controllers
                         {
                             Points = points,
                             Status = "Incorrect",
-                            Message = "Your solution is incorrect.",
+                            Message = $"Your solution is incorrect. Current Points {points}.",
                             Hints = hintsForStudent
                         };
 
