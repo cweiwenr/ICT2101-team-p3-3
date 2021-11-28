@@ -1,27 +1,47 @@
-﻿<div class="text-left">
+﻿@model IEnumerable<Vraze.Models.Challenge>
+@{
+    ViewData["Title"] = "Challenge Management";
+}
+<div class="text-left">
     <h1 class="display-4">Challenge Management</h1>
 </div>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Challenge ID</th>
-            <th scope="col">Map</th>
-            <th scope="col">Hints</th>
-            <th scope="col">Solution</th>
-            <th scope="col">Is Tutorial</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td><a href="#" class="card-link">View</a><a href="#" class="card-link">Remove</a></td>
-        </tr>
-    </tbody>
-</table>
+<div class="d-flex flex-row-reverse mb-2">
+    <a class="btn btn-info" asp-action="Create" asp-controller="Challenge">Add New Challenge</a>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Challenge Id</th>
+                <th scope="col">Map Image</th>
+                <th scope="col">Hints</th>
+                <th scope="col">Solution</th>
+                <th scope="col">Is Tutorial Challenge</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ChallengeId)</td>
+                    <td><img src="@item.MapImageUrl" alt="" width="90" /></td>
+                    <td>
+                        <ol class="pl-2">
+                            @if (item.Hints != null)
+                            {
+                                foreach (var hint in item.Hints)
+                                {
+                                    <li>@hint.HintInformation</li>
+                                }
+                            }
+                        </ol>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Solution)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IsTutorialChallenge)</td>
+                    <td><a asp-action="Edit" asp-route-id="@item.ChallengeId" class="btn btn-sm btn-info">Edit</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -18,8 +18,11 @@ namespace Vraze.Migrations
 
             modelBuilder.Entity("Vraze.Models.Challenge", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ChallengeId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsTutorialChallenge")
@@ -31,16 +34,22 @@ namespace Vraze.Migrations
                     b.Property<string>("Solution")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("ChallengeId");
 
                     b.ToTable("Challenges");
                 });
 
             modelBuilder.Entity("Vraze.Models.ChallengeHistory", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ChallengeHistoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<double?>("CarDistanceTravelled")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("CarSpeed")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("ChallengeId")
                         .HasColumnType("INTEGER");
@@ -57,22 +66,31 @@ namespace Vraze.Migrations
                     b.Property<int>("StudentId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.HasKey("ChallengeHistoryId");
+
+                    b.HasIndex("ChallengeId");
+
+                    b.HasIndex("SessionId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("ChallengeHistories");
                 });
 
             modelBuilder.Entity("Vraze.Models.Facilitator", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("FacilitatorId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FacilitatorName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsSystemAdmin")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
@@ -80,47 +98,49 @@ namespace Vraze.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("FacilitatorId");
 
                     b.ToTable("Facilitators");
                 });
 
             modelBuilder.Entity("Vraze.Models.GameSession", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SessionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AccessCode")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ChallengeId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ChallengeList")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("CreatedByFacilitatorId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("TEXT");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("SessionEndTime")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("SessionEndTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("SessionStartTime")
+                    b.Property<DateTime?>("SessionStartTime")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.Property<string>("StudentList")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("SessionId");
 
                     b.ToTable("GameSessions");
                 });
 
             modelBuilder.Entity("Vraze.Models.Hint", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("HintId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -130,7 +150,7 @@ namespace Vraze.Migrations
                     b.Property<string>("HintInformation")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("HintId");
 
                     b.HasIndex("ChallengeId");
 
@@ -139,53 +159,65 @@ namespace Vraze.Migrations
 
             modelBuilder.Entity("Vraze.Models.Student", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("StudentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("GameSessionId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("HasCompletedTutorial")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameSessionId");
+                    b.HasKey("StudentId");
 
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("Vraze.Models.ChallengeHistory", b =>
+                {
+                    b.HasOne("Vraze.Models.Challenge", "Challenge")
+                        .WithMany()
+                        .HasForeignKey("ChallengeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Vraze.Models.GameSession", "Session")
+                        .WithMany()
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Vraze.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Challenge");
+
+                    b.Navigation("Session");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("Vraze.Models.Hint", b =>
                 {
-                    b.HasOne("Vraze.Models.Challenge", null)
+                    b.HasOne("Vraze.Models.Challenge", "Challenge")
                         .WithMany("Hints")
                         .HasForeignKey("ChallengeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("Vraze.Models.Student", b =>
-                {
-                    b.HasOne("Vraze.Models.GameSession", null)
-                        .WithMany("StudentList")
-                        .HasForeignKey("GameSessionId");
+                    b.Navigation("Challenge");
                 });
 
             modelBuilder.Entity("Vraze.Models.Challenge", b =>
                 {
                     b.Navigation("Hints");
-                });
-
-            modelBuilder.Entity("Vraze.Models.GameSession", b =>
-                {
-                    b.Navigation("StudentList");
                 });
 #pragma warning restore 612, 618
         }
