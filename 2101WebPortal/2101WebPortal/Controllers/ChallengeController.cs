@@ -80,6 +80,12 @@ namespace Vraze.Controllers
                 ViewData["role"] = roleCookie; //Store the role of the user inside the view data for authenticating the user
                 var challenge = _context.Challenges.Where(c => c.ChallengeId == id).Include(c => c.Hints).FirstOrDefault();
 
+                // Challenge Id does not exist
+                if (challenge == null)
+                {
+                    return RedirectToAction("Manage", "Challenge");
+                }
+
                 return View("edit", challenge); //Return the Edit Challenge Information View with the given Challenge Id
             }
         }

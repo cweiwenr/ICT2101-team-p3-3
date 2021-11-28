@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
+using Microsoft.Net.Http.Headers;
 using Vraze.Controllers;
 using Vraze.Models;
 using Xunit;
@@ -15,6 +17,1008 @@ namespace _2101WebPortalWhiteBoxTest
 {
     public class ChallengeControllerTests
     {
+        [Fact]
+        public void Index_ReturnRedirectToActionResult_WhenRoleCookieIsAdmin()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "admin",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = true,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Admin", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.Index() as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Challenge Controller's Manage Action (Manage Challenges Page)
+                Assert.Equal("Manage", result.ActionName);
+                Assert.Equal("Challenge", result.ControllerName);
+            }
+        }
+
+        [Fact]
+        public void Index_ReturnRedirectToActionResult_WhenRoleCookieIsFacilitator()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.Index() as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Challenge Controller's Manage Action (Manage Challenges Page)
+                Assert.Equal("Manage", result.ActionName);
+                Assert.Equal("Challenge", result.ControllerName);
+            }
+        }
+
+        [Fact]
+        public void Index_ReturnRedirectToActionResult_WhenRoleCookieIsStudent()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Student", "studentId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.Index() as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Home Controller's Index Action (Home Page)
+                Assert.Equal("Index", result.ActionName);
+                Assert.Equal("Home", result.ControllerName);
+            }
+        }
+
+        [Fact]
+        public void Index_ReturnRedirectToActionResult_WhenRoleCookieIsEmpty()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role="});
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.Index() as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Home Controller's Index Action (Home Page)
+                Assert.Equal("Index", result.ActionName);
+                Assert.Equal("Home", result.ControllerName);
+            }
+        }
+
+        [Fact]
+        public async Task Manage_ReturnViewResult_WhenRoleCookieIsAdmin()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "admin",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = true,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Admin", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = (await controller.Manage()) as ViewResult;
+
+                // Assert that the name of the view returned is 'Index' (Manage Challenge Page)
+                Assert.Equal("index", result.ViewName);
+            }
+        }
+
+        [Fact]
+        public async Task Manage_ReturnViewResult_WhenRoleCookieIsFacilitator()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = (await controller.Manage()) as ViewResult;
+
+                // Assert that the name of the view returned is 'Index' (Manage Challenge Page)
+                Assert.Equal("index", result.ViewName);
+            }
+        }
+
+        [Fact]
+        public async Task Manage_ReturnRedirectToActionResult_WhenRoleCookieIsStudent()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Student", "studentId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = (await controller.Manage()) as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Home Controller's Index Action (Home Page)
+                Assert.Equal("Index", result.ActionName);
+                Assert.Equal("Home", result.ControllerName);
+            }
+        }
+
+        [Fact]
+        public async Task Manage_ReturnRedirectToActionResult_WhenRoleCookieIsEmpty()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = (await controller.Manage()) as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Home Controller's Index Action (Home Page)
+                Assert.Equal("Index", result.ActionName);
+                Assert.Equal("Home", result.ControllerName);
+            }
+        }
+
+        [Fact]
+        public void GotoCreateChallengePage_ReturnViewResult_WhenRoleCookieIsAdmin()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "admin",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = true,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Admin", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.GotoCreateChallengePage() as ViewResult;
+
+                // Assert that the name of the view returned is 'create' (Create Challenge Page)
+                Assert.Equal("create", result.ViewName);
+            }
+        }
+
+        [Fact]
+        public void GotoCreateChallengePage_ReturnViewResult_WhenRoleCookieIsFacilitator()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.GotoCreateChallengePage() as ViewResult;
+
+                // Assert that the name of the view returned is 'create' (Create Challenge Page)
+                Assert.Equal("create", result.ViewName);
+            }
+        }
+
+        [Fact]
+        public void GotoCreateChallengePage_ReturnRedirectToActionResult_WhenRoleCookieIsStudent()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Student", "studentId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.GotoCreateChallengePage() as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Home Controller's Index Action (Home Page)
+                Assert.Equal("Index", result.ActionName);
+                Assert.Equal("Home", result.ControllerName);
+            }
+        }
+
+        [Fact]
+        public void GotoCreateChallengePage_ReturnRedirectToActionResult_WhenRoleCookieIsEmpty()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.GotoCreateChallengePage() as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Home Controller's Index Action (Home Page)
+                Assert.Equal("Index", result.ActionName);
+                Assert.Equal("Home", result.ControllerName);
+            }
+        }
+
+        [Fact]
+        public void GotoEditChallengePage_ReturnViewResult_WhenRoleCookieIsAdminAndChallengeIdCorrect()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "admin",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = true,
+                    IsDeleted = false
+                });
+
+                context.Challenges.Add(new Challenge
+                {
+                    ChallengeId = 1,
+                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1638074732/Screenshot_2021-11-28_at_12.42.59_w3rm69.png",
+                    Solution = "FLFFRFFFFLFF",
+                    IsTutorialChallenge = true,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Admin", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.GotoEditChallengePage(1) as ViewResult;
+
+                // Assert that the name of the view returned is 'Edit' (Edit Challenge Page)
+                Assert.Equal("edit", result.ViewName);
+            }
+        }
+
+        [Fact]
+        public void GotoEditChallengePage_ReturnViewResult_WhenRoleCookieIsFacilitatorAndChallengeIdCorrect()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.Challenges.Add(new Challenge
+                {
+                    ChallengeId = 1,
+                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1638074732/Screenshot_2021-11-28_at_12.42.59_w3rm69.png",
+                    Solution = "FLFFRFFFFLFF",
+                    IsTutorialChallenge = true,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.GotoEditChallengePage(1) as ViewResult;
+
+                // Assert that the name of the view returned is 'Edit' (Edit Challenge Page)
+                Assert.Equal("edit", result.ViewName);
+            }
+        }
+
+        [Fact]
+        public void GotoEditChallengePage_ReturnRedirectToActionResult_WhenRoleCookieIsAdminAndChallengeIdIncorrect()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "admin",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = true,
+                    IsDeleted = false
+                });
+
+                context.Challenges.Add(new Challenge
+                {
+                    ChallengeId = 1,
+                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1638074732/Screenshot_2021-11-28_at_12.42.59_w3rm69.png",
+                    Solution = "FLFFRFFFFLFF",
+                    IsTutorialChallenge = true,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Admin", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.GotoEditChallengePage(4) as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Challenge Controller's Manage Action (Manage Challenges Page)
+                Assert.Equal("Manage", result.ActionName);
+                Assert.Equal("Challenge", result.ControllerName);
+            }
+        }
+
+        [Fact]
+        public void GotoEditChallengePage_ReturnRedirectToActionResult_WhenRoleCookieIsFacilitatorAndChallengeIdIncorrect()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts and Challenge into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.Challenges.Add(new Challenge
+                {
+                    ChallengeId = 1,
+                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1638074732/Screenshot_2021-11-28_at_12.42.59_w3rm69.png",
+                    Solution = "FLFFRFFFFLFF",
+                    IsTutorialChallenge = true,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.GotoEditChallengePage(4) as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Challenge Controller's Manage Action (Manage Challenges Page)
+                Assert.Equal("Manage", result.ActionName);
+                Assert.Equal("Challenge", result.ControllerName);
+            }
+        }
+
+        [Fact]
+        public void GotoEditChallengePage_ReturnRedirectToActionResult_WhenRoleCookieIsStudent()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=Student", "studentId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.GotoEditChallengePage(1) as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Home Controller's Index Action (Home Page)
+                Assert.Equal("Index", result.ActionName);
+                Assert.Equal("Home", result.ControllerName);
+            }
+        }
+
+        [Fact]
+        public void GotoEditChallengePage_ReturnRedirectToActionResult_WhenRoleCookieIsEmpty()
+        {
+            // Configure the in-memory database for the unit test
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "VrazeTestDatabase")
+                .Options;
+
+            // Seed Facilitator Accounts into the database
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Facilitators.Add(new Facilitator
+                {
+                    FacilitatorId = 1,
+                    Username = "instructor1",
+                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                    IsSystemAdmin = false,
+                    IsDeleted = false
+                });
+
+                context.SaveChanges();
+            }
+
+            // Use clean instance of database with seeded data to conduct the unit test
+            using (var context = new ApplicationDbContext(options))
+            {
+                // Creates the Http Context to mock the Http Request being sent
+                var httpContext = new DefaultHttpContext();
+
+                // Creates mock cookies data within the Http Request
+                var cookie = new StringValues(new string[] { "role=" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
+
+                // Assign the mocked Http Context to a mock Controller Context
+                var controllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                };
+
+                // Assign the mocked Controller Context to a mock Challenge Controller
+                var controller = new ChallengeController(context)
+                {
+                    ControllerContext = controllerContext
+                };
+
+                // Call the controller method to start the test
+                var result = controller.GotoEditChallengePage(1) as RedirectToActionResult;
+
+                // Assert that the user is redirected to the Home Controller's Index Action (Home Page)
+                Assert.Equal("Index", result.ActionName);
+                Assert.Equal("Home", result.ControllerName);
+            }
+        }
+
         [Fact]
         public async Task Create_ReturnsOkObjectResultWithSuccessMessage_WhenChallengeInfoIsComplete()
         {
@@ -53,8 +1057,8 @@ namespace _2101WebPortalWhiteBoxTest
                 };
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext() {
@@ -157,8 +1161,8 @@ namespace _2101WebPortalWhiteBoxTest
                 };
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext()
@@ -225,8 +1229,8 @@ namespace _2101WebPortalWhiteBoxTest
                 };
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext()
@@ -315,8 +1319,8 @@ namespace _2101WebPortalWhiteBoxTest
                 };
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext()
@@ -424,8 +1428,8 @@ namespace _2101WebPortalWhiteBoxTest
                 };
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext()
@@ -518,8 +1522,8 @@ namespace _2101WebPortalWhiteBoxTest
                 };
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext()
@@ -595,8 +1599,8 @@ namespace _2101WebPortalWhiteBoxTest
                 };
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext()
@@ -689,8 +1693,8 @@ namespace _2101WebPortalWhiteBoxTest
                 };
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext()
@@ -774,8 +1778,8 @@ namespace _2101WebPortalWhiteBoxTest
                 var httpContext = new DefaultHttpContext();
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext()
@@ -871,8 +1875,8 @@ namespace _2101WebPortalWhiteBoxTest
                 var httpContext = new DefaultHttpContext();
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext()
@@ -956,8 +1960,8 @@ namespace _2101WebPortalWhiteBoxTest
                 var httpContext = new DefaultHttpContext();
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext()
@@ -1053,8 +2057,8 @@ namespace _2101WebPortalWhiteBoxTest
                 var httpContext = new DefaultHttpContext();
 
                 // Creates mock cookies data within the Http Request
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("role", "Facilitator"));
-                httpContext.Request.Cookies.Append(new KeyValuePair<string, string>("facilitatorId", "1"));
+                var cookie = new StringValues(new string[] { "role=Facilitator", "facilitatorId=1" });
+                httpContext.Request.Headers.Add(HeaderNames.Cookie, cookie);
 
                 // Assign the mocked Http Context to a mock Controller Context
                 var controllerContext = new ControllerContext()
