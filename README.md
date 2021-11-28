@@ -85,7 +85,7 @@ The team has updated the diagrams from the M2 report.
 | L01 | Select facilitator user type | ------------------- | ---------------- |
 
 ### Unit Test Cases
-![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108358/newest_state_-_Copy_of_Copy_of_Page_1_1_rfu02u.png)
+![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108863/logintestcase_qczbiz.png)
 ![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638109160/studentplay_x2meji.png)
 ![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638109161/challengemanagement_pklxmw.png)
 ![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638109173/managegamesession_ryiiml.png)
