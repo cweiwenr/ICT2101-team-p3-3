@@ -15,7 +15,7 @@ The project is coded using the [.NET Core 3.1.415 SDK](https://dotnet.microsoft.
 <br />![Run Project](https://res.cloudinary.com/dj6afbyih/image/upload/v1637216507/ict1004/odkv89lttlexndkhxexd.jpg)
 
 # Seed Data
-To aid the testing of the system, we have seeded some data into the database for demostration purposes. The information of the seed data can be viewed in the wiki via this [link](http://).
+To aid the testing of the system, we have seeded some data into the database for demostration purposes. The information of the seed data can be viewed in the [Wiki](https://github.com/cweiwenr/ICT2101-team-p3-3/wiki/Seed-Data).
 
 # Development Workflow
 
@@ -39,7 +39,7 @@ The team conducted UAT on the complete system. The State Diagram and Use Case Di
 ![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108358/newest_state_-_Copy_of_Copy_of_Page_1_1_rfu02u.png)
 
 ### Unit Test Cases
-The test cases used for the black box testing can be found in the Wiki - 
+The test cases used for the black box testing can be found in the [Wiki](https://github.com/cweiwenr/ICT2101-team-p3-3/wiki/Test-Cases-for-User-Acceptance-Testing)
 
 ### UAT Test Demo
 [![WBTestImagePreview](https://res.cloudinary.com/dj6afbyih/image/upload/v1638179472/Screenshot_2021-11-29_at_17.49.17_ed4gwl.png)](https://www.youtube.com/watch?v=kCtZK9qRJxc "ICT2x01 team3-p3 UAT")
