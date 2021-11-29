@@ -1,18 +1,15 @@
 # Pre-requistes
 ### Visual Studio IDE
-* The project is coded using the Asp.NET Core Framework and hence require that an Visual Studio IDE either [Visual Studio Community 2019](https://visualstudio.microsoft.com/downloads/) or [Visual Studio Community 2022](https://visualstudio.microsoft.com/downloads/) be used to run the project. 
+* The project is coded using the Asp.NET Core Framework and hence require that an Visual Studio IDE either [Visual Studio Community 2019](https://visualstudio.microsoft.com/downloads/) or [Visual Studio Community 2022](https://visualstudio.microsoft.com/downloads/) be used to build/run the project. 
 * Do also ensure that with you have selected the '**ASP.NET and Web Development**' workload when installing the IDE.  
 
 ### Additional SDKs
 The project is coded using the [.NET Core 3.1.415 SDK](https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.415-windows-x64-installer) as it has Long Term Support(LTS) and require the [Asp.NET Core 3.1.21 Runtime](https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-aspnetcore-3.1.21-windows-x64-installer) to run the project.
 
-# Running the Project
+# Building & Running the Project
 1. Open the `2101WebPortal.sln` file with a Visual Studio IDE
-<br />![Open Solution Image](https://res.cloudinary.com/dj6afbyih/image/upload/v1637216507/ict1004/odkv89lttlexndkhxexd.jpg)
 2. Right-click the Project (`2101WebPortal.csproj`) & Click `Build 2101WebPortal`
-<br />![Right Click Build Project](https://res.cloudinary.com/dj6afbyih/image/upload/v1637216507/ict1004/odkv89lttlexndkhxexd.jpg) 
-3. Once the Output Console display that there is `0 failed`, Click on the green play icon to Run the project.
-<br />![Run Project](https://res.cloudinary.com/dj6afbyih/image/upload/v1637216507/ict1004/odkv89lttlexndkhxexd.jpg)
+3. Once the Build Output Console Window display that there is `0 failed`, Click on the green play icon to Run the project.
 
 # Seed Data
 To aid the testing of the system, we have seeded some data into the database for demostration purposes. The information of the seed data can be viewed in the [Wiki](https://github.com/cweiwenr/ICT2101-team-p3-3/wiki/Seed-Data).
@@ -48,11 +45,21 @@ The test cases used for the black box testing can be found in the [Wiki](https:/
 The team decided to conduct unit testing on the `ChallengeController` class using the built-in testing framework, XUnit offered with Visual Studio IDE. This is because the `ChallengeController` is required to interact with the Database Context class and the Model class to perform create, update and delete operations.
 
 ### Unit Test Demo
-[![WBTestImagePreview](https://res.cloudinary.com/dj6afbyih/image/upload/v1638017614/ict1004/Screenshot_2021-11-27_at_20.53.09_kdpfxz.png)](https://www.youtube.com/watch?v=74vZE54VEos "ICT2X01 P3-3 White Box Testing")
+[![WBTestImagePreview](https://res.cloudinary.com/dj6afbyih/image/upload/v1638017614/ict1004/Screenshot_2021-11-27_at_20.53.09_kdpfxz.png)](https://www.youtube.com/watch?v=JGy0yd1WFb4 "ICT2X01 P3-3 White Box Testing")
+
+### How to Build & Run Unit Test
+1. Right-Click the Project `2101WebPortalWhiteBoxTest`
+2. Click on `Build 2101WebPortalWhiteBoxTest`
+3. Ensure that the Build Output Console Window shows `0 failed`
+4. Navigate to the `ChallengeControllerTests.cs` file & Right-Click `Run Tests`
 
 ### Unit Test Statistics
+The statistics for the unit testing is done mannually as the team could not find a suitable coverage report tool to generate the results. Please refer to the []() for the coverage report of the Challenge Controller class, `ChallengeController.cs`.
 
-### Test Cases
+The following is the Control Flow Graph for the Challenge Controller Class:
+![CFGIMAGE](https://res.cloudinary.com/dj6afbyih/image/upload/v1638192979/Blank_diagram_-_Page_4_1_bmgtmr.jpg)
+
+### Unit Testing Test Cases
 | Test ID | Method Tested           | Condition Tested                                                                                       | Expected Result                                                                                                                         | Coverage Statistic                                           |
 | ------- | ----------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | WB-1    | Index                   | When the role variable value in the cookies is "Facilitator"                                           | The user should be redirected to the Manage Challenges View                                                                             | Covered Lines: 8<br>Coverable Lines: 16<br>Total Lines: 275  |
@@ -76,3 +83,5 @@ The team decided to conduct unit testing on the `ChallengeController` class usin
 | WB-19   | Delete                  | When the Challenge ID provided does not exist.                                                         | The user will receive a failure message "There was an error trying to delete this challenge, please contact the system administrator."  | Covered Lines: 15<br>Coverable Lines: 17<br>Total Lines: 275 |
 | WB-20   | Restore                 | When the Challenge ID provided is valid                                                                | The user will receive the success message "Successfully restored challenge."                                                            | Covered Lines: 12<br>Coverable Lines: 17<br>Total Lines: 275 |
 | WB-21   | Restore                 | When the Challenge ID provided does not exist.                                                         | The user will receive a failure message "There was an error trying to restore this challenge, please contact the system administrator." | Covered Lines: 15<br>Coverable Lines: 17<br>Total Lines: 275 |
+
+# Gantt Chart
