@@ -15,36 +15,7 @@ The project is coded using the [.NET Core 3.1.415 SDK](https://dotnet.microsoft.
 <br />![Run Project](https://res.cloudinary.com/dj6afbyih/image/upload/v1637216507/ict1004/odkv89lttlexndkhxexd.jpg)
 
 # Seed Data
-Below are some data that have been seeded into the database for demostration purposes
-
-### Admin/Facilitator Accounts
-| Role                 | Username    | Password    |
-| -------------------- | ----------- | ----------- |
-| System Administrator | admin       | P@ssw0rd123 |
-| Facilitator          | instructor1 | P@ssw0rd123 |
-
-### Challenges
-| Challenge Id | Is Tutorial Challenge |
-| ------------ | --------------------- |
-| 1            | Yes                   |
-| 2            | No                    |
-| 3            | No                    |
-| 4            | No                    |
-
-### Students
-| Student Id | Name                     |
-| ---------- | ------------------------ |
-| 2001672    | Gerald                   |
-| 2001893    | Reuben                   |
-| 2000652    | Zhong Yi                 |
-| 2002453    | Sneha                    |
-| 2000995    | Merrill                  |
-
-### Game Sessions
-| Game Session ID | Access Code | Students Permitted                          | Is Active | Challenges |
-| --------------- | ----------- | --------------------------------------------| --------- | ---------- |
-| 1               | LAB01       | 2001672, 2001893, 2000652, 2002453, 2000995 | Yes       | 1;2;3;4    |
-| 2               | LAB02       | 2001672, 2000652                            | No        | 1;2;4      |
+To aid the testing of the system, we have seeded some data into the database for demostration purposes. The information of the seed data can be viewed in the wiki via this [link](http://).
 
 # Development Workflow
 
@@ -57,20 +28,9 @@ Below are some data that have been seeded into the database for demostration pur
 >>> + Code Review
 >>> + Merge PR and handle conflicts
 >> + PR to Main for final prototype release
+
 # User Acceptance Testing
-The team conducted UAT on the complete system. The state diagram and ise case diagrams has been updated as shown. 
-
-### UAT Test Demo
-[![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108311/uat_zkl3v5.png)](https://www.youtube.com/watch?v=kCtZK9qRJxc "ICT2x01 team3-p3 UAT")
-
-# White Box Testing
-The team decided to conduct unit testing on the `ChallengeController` class using the built-in testing framework, XUnit offered with Visual Studio IDE. This is because the `ChallengeController` is required to interact with the Database Context class and the Model class to perform create, update and delete operations.
-
-### Unit Test Demo
-[![WBTestImagePreview](https://res.cloudinary.com/dj6afbyih/image/upload/v1638017614/ict1004/Screenshot_2021-11-27_at_20.53.09_kdpfxz.png)](https://www.youtube.com/watch?v=X7RzZ7VLnlQ "ICT2X01 P3-3 White Box Testing")
-
-# Updated Diagrams
-The team has updated the diagrams from the M2 report.
+The team conducted UAT on the complete system. The State Diagram and Use Case Diagrams have been updated from the M2 report as shown below for the UAT. 
 
 ### Use Case Diagram
 ![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108353/M2_-_use_case_diagram_llqutc.png)
@@ -78,14 +38,21 @@ The team has updated the diagrams from the M2 report.
 ### Full System State Diagram
 ![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108358/newest_state_-_Copy_of_Copy_of_Page_1_1_rfu02u.png)
 
+### Unit Test Cases
+The test cases used for the black box testing can be found in the Wiki - 
+
+### UAT Test Demo
+[![WBTestImagePreview](https://res.cloudinary.com/dj6afbyih/image/upload/v1638179472/Screenshot_2021-11-29_at_17.49.17_ed4gwl.png)](https://www.youtube.com/watch?v=kCtZK9qRJxc "ICT2x01 team3-p3 UAT")
+
+# White Box Testing
+The team decided to conduct unit testing on the `ChallengeController` class using the built-in testing framework, XUnit offered with Visual Studio IDE. This is because the `ChallengeController` is required to interact with the Database Context class and the Model class to perform create, update and delete operations.
+
+### Unit Test Demo
+[![WBTestImagePreview](https://res.cloudinary.com/dj6afbyih/image/upload/v1638017614/ict1004/Screenshot_2021-11-27_at_20.53.09_kdpfxz.png)](https://www.youtube.com/watch?v=74vZE54VEos "ICT2X01 P3-3 White Box Testing")
+
 ### Unit Test Statistics
 
 ### Test Cases
 | S/N | Test Name                                                               | Method Being Tested | Expected Outcome |
-| L01 | Select facilitator user type | ------------------- | ---------------- |
+| --- | ----------------------------------------------------------------------- | ------------------- | ---------------- |
 
-### Unit Test Cases
-![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108863/logintestcase_qczbiz.png)
-![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638109160/studentplay_x2meji.png)
-![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638109161/challengemanagement_pklxmw.png)
-![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638109173/managegamesession_ryiiml.png)
