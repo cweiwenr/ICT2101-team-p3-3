@@ -54,7 +54,7 @@ The team decided to conduct unit testing on the `ChallengeController` class usin
 4. Navigate to the `ChallengeControllerTests.cs` file & Right-Click `Run Tests`
 
 ### Unit Test Statistics
-The statistics for the unit testing is done mannually as the team could not find a suitable coverage report tool to generate the results. Please refer to the []() for the coverage report of the Challenge Controller class, `ChallengeController.cs`.
+The statistics for the unit testing is done mannually as the team could not find a suitable coverage report tool to generate the results. Please refer to the [Unit Testing Test Cases](https://github.com/cweiwenr/ICT2101-team-p3-3#unit-testing-test-cases) section for the coverage report of the Challenge Controller class, `ChallengeController.cs`.
 
 The following is the Control Flow Graph for the Challenge Controller Class:
 ![CFGIMAGE](https://res.cloudinary.com/dj6afbyih/image/upload/v1638192979/Blank_diagram_-_Page_4_1_bmgtmr.jpg)
