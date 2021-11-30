@@ -21,7 +21,7 @@
     <div class="card">
         <div class="card-body">
             <h2 class="text-info">Game Session Information</h2>
-            <div class="alert alert-warning alert-dismissible fade show d-none" role="alert">
+            <div id="errorMsgAlertBox" class="alert alert-warning alert-dismissible fade show d-none" role="alert">
                 <span id="errorMsgAlert"></span>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -88,7 +88,7 @@
         $(button).parent().parent().remove();
     }
     $(document).ready(function () {
-        $('#errorMsgAlert').addClass('d-none');
+        $('#errorMsgAlertBox').addClass('d-none');
         $('#errorMsgAlert').text('');
 
         $("#btnAddNewStudentRow").click(function () {
@@ -206,7 +206,7 @@
                     data: webFormDataInString,
                     success: function (response) {
                         if (response["status"] == 404) {
-                            $('#errorMsgAlert').removeClass('d-none');
+                            $('#errorMsgAlertBox').removeClass('d-none');
                             $("#errorMsgAlert").text(response["message"]);
                         }
                         else {
