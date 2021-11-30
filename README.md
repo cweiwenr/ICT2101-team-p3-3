@@ -35,7 +35,7 @@ The team conducted UAT on the complete system. The State Diagram and Use Case Di
 ### Full System State Diagram
 ![WBTestImagePreview](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638108358/newest_state_-_Copy_of_Copy_of_Page_1_1_rfu02u.png)
 
-### Unit Test Cases
+### UAT Test Cases
 The test cases used for the black box testing can be found in the [Wiki](https://github.com/cweiwenr/ICT2101-team-p3-3/wiki/Test-Cases-for-User-Acceptance-Testing)
 
 ### UAT Test Demo
@@ -85,3 +85,4 @@ The following is the Control Flow Graph for the Challenge Controller Class:
 | WB-21   | Restore                 | When the Challenge ID provided does not exist.                                                         | The user will receive a failure message "There was an error trying to restore this challenge, please contact the system administrator." | Covered Lines: 15<br>Coverable Lines: 17<br>Total Lines: 275 |
 
 # Gantt Chart
+![GANTTCHARTIMAGE](http://paste-link-here.png)
