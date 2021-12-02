@@ -84,5 +84,8 @@ The following is the Control Flow Graph for the Challenge Controller Class:
 | WB-20   | Restore                 | When the Challenge ID provided is valid                                                                | The user will receive the success message "Successfully restored challenge."                                                            | Covered Lines: 12<br>Coverable Lines: 17<br>Total Lines: 275 |
 | WB-21   | Restore                 | When the Challenge ID provided does not exist.                                                         | The user will receive a failure message "There was an error trying to restore this challenge, please contact the system administrator." | Covered Lines: 15<br>Coverable Lines: 17<br>Total Lines: 275 |
 
+# Burndown Chart
+![BURNDOWNCHART](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638441811/Picture1_ddh9er.png)
+
 # Gantt Chart
 ![GANTTCHARTIMAGE](http://paste-link-here.png)
