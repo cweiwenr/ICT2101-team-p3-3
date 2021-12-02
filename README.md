@@ -88,4 +88,4 @@ The following is the Control Flow Graph for the Challenge Controller Class:
 ![BURNDOWNCHART](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638441811/Picture1_ddh9er.png)
 
 # Gantt Chart
-![GANTTCHARTIMAGE](http://paste-link-here.png)
+![GANTTCHARTIMAGE](https://res.cloudinary.com/dc6eqgbc0/image/upload/v1638449236/image_2021-12-02_20-45-24_jbloci.png)
