@@ -28,14 +28,17 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -82,14 +85,17 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -136,14 +142,17 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -189,14 +198,17 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -243,14 +255,17 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -296,14 +311,17 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -350,23 +368,29 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
-                context.Challenges.Add(new Challenge
+                if (!context.Challenges.Any())
                 {
-                    ChallengeId = 1,
-                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1638074732/Screenshot_2021-11-28_at_12.42.59_w3rm69.png",
-                    Solution = "FLFFRFFFFLFF",
-                    IsTutorialChallenge = true,
-                    IsDeleted = false
-                });
+                    context.Challenges.Add(new Challenge
+                    {
+                        ChallengeId = 1,
+                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1638074732/Screenshot_2021-11-28_at_12.42.59_w3rm69.png",
+                        Solution = "FLFFRFFFFLFF",
+                        IsTutorialChallenge = true,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -412,23 +436,29 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts and Challenge into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
-                context.Challenges.Add(new Challenge
+                if (!context.Facilitators.Any())
                 {
-                    ChallengeId = 1,
-                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1638074732/Screenshot_2021-11-28_at_12.42.59_w3rm69.png",
-                    Solution = "FLFFRFFFFLFF",
-                    IsTutorialChallenge = true,
-                    IsDeleted = false
-                });
+                    context.Challenges.Add(new Challenge
+                    {
+                        ChallengeId = 1,
+                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1638074732/Screenshot_2021-11-28_at_12.42.59_w3rm69.png",
+                        Solution = "FLFFRFFFFLFF",
+                        IsTutorialChallenge = true,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -475,14 +505,17 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -529,13 +562,17 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash ="$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                if (!context.Facilitators.Any())
+                {
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -632,14 +669,17 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -700,14 +740,17 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -768,36 +811,49 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts, Challenge & Hint into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
-                context.Hints.AddRange(new Hint {
-                    HintId = 1,
-                    HintInformation = "No. of Commands needed is 4",
-                    ChallengeId = 1
-                }, new Hint {
-                    HintId = 2,
-                    HintInformation = "The first command is Go Forward",
-                    ChallengeId = 1
-                }, new Hint {
-                    HintId = 3,
-                    HintInformation = "The second command is Right Turn",
-                    ChallengeId = 1
-                });
+                if (!context.Hints.Any())
+                {
+                    context.Hints.AddRange(new Hint
+                    {
+                        HintId = 1,
+                        HintInformation = "No. of Commands needed is 4",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 2,
+                        HintInformation = "The first command is Go Forward",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 3,
+                        HintInformation = "The second command is Right Turn",
+                        ChallengeId = 1
+                    });
+                }
 
-                context.Challenges.Add(new Challenge {
-                    ChallengeId = 1,
-                    Solution = "FRLS",
-                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
-                    IsTutorialChallenge = false,
-                    IsDeleted = false
-                });
+                if (!context.Challenges.Any())
+                {
+                    context.Challenges.Add(new Challenge
+                    {
+                        ChallengeId = 1,
+                        Solution = "FRLS",
+                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
+                        IsTutorialChallenge = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -873,40 +929,49 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts, Challenge & Hint into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
-                context.Hints.AddRange(new Hint
+                if (!context.Hints.Any())
                 {
-                    HintId = 1,
-                    HintInformation = "No. of Commands needed is 4",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 2,
-                    HintInformation = "The first command is Go Forward",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 3,
-                    HintInformation = "The second command is Right Turn",
-                    ChallengeId = 1
-                });
+                    context.Hints.AddRange(new Hint
+                    {
+                        HintId = 1,
+                        HintInformation = "No. of Commands needed is 4",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 2,
+                        HintInformation = "The first command is Go Forward",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 3,
+                        HintInformation = "The second command is Right Turn",
+                        ChallengeId = 1
+                    });
+                }
 
-                context.Challenges.Add(new Challenge
+                if (!context.Challenges.Any())
                 {
-                    ChallengeId = 1,
-                    Solution = "FRLS",
-                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
-                    IsTutorialChallenge = false,
-                    IsDeleted = false
-                });
+                    context.Challenges.Add(new Challenge
+                    {
+                        ChallengeId = 1,
+                        Solution = "FRLS",
+                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
+                        IsTutorialChallenge = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -967,40 +1032,49 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts, Challenge & Hint into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
-                context.Hints.AddRange(new Hint
+                if (!context.Hints.Any())
                 {
-                    HintId = 1,
-                    HintInformation = "No. of Commands needed is 4",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 2,
-                    HintInformation = "The first command is Go Forward",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 3,
-                    HintInformation = "The second command is Right Turn",
-                    ChallengeId = 1
-                });
+                    context.Hints.AddRange(new Hint
+                    {
+                        HintId = 1,
+                        HintInformation = "No. of Commands needed is 4",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 2,
+                        HintInformation = "The first command is Go Forward",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 3,
+                        HintInformation = "The second command is Right Turn",
+                        ChallengeId = 1
+                    });
+                }
 
-                context.Challenges.Add(new Challenge
+                if (!context.Challenges.Any())
                 {
-                    ChallengeId = 1,
-                    Solution = "FRLS",
-                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
-                    IsTutorialChallenge = false,
-                    IsDeleted = false
-                });
+                    context.Challenges.Add(new Challenge
+                    {
+                        ChallengeId = 1,
+                        Solution = "FRLS",
+                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
+                        IsTutorialChallenge = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -1061,23 +1135,29 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts, Challenge & Hint into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
-                context.Challenges.Add(new Challenge
+                if (!context.Challenges.Any())
                 {
-                    ChallengeId = 1,
-                    Solution = "FRLS",
-                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
-                    IsTutorialChallenge = false,
-                    IsDeleted = false
-                });
+                    context.Challenges.Add(new Challenge
+                    {
+                        ChallengeId = 1,
+                        Solution = "FRLS",
+                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
+                        IsTutorialChallenge = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -1138,40 +1218,49 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts, Challenge & Hint into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
-                context.Hints.AddRange(new Hint
+                if (!context.Hints.Any())
                 {
-                    HintId = 1,
-                    HintInformation = "No. of Commands needed is 4",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 2,
-                    HintInformation = "The first command is Go Forward",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 3,
-                    HintInformation = "The second command is Right Turn",
-                    ChallengeId = 1
-                });
+                    context.Hints.AddRange(new Hint
+                    {
+                        HintId = 1,
+                        HintInformation = "No. of Commands needed is 4",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 2,
+                        HintInformation = "The first command is Go Forward",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 3,
+                        HintInformation = "The second command is Right Turn",
+                        ChallengeId = 1
+                    });
+                }
 
-                context.Challenges.Add(new Challenge
+                if (!context.Challenges.Any())
                 {
-                    ChallengeId = 1,
-                    Solution = "FRLS",
-                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
-                    IsTutorialChallenge = false,
-                    IsDeleted = false
-                });
+                    context.Challenges.Add(new Challenge
+                    {
+                        ChallengeId = 1,
+                        Solution = "FRLS",
+                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
+                        IsTutorialChallenge = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -1232,40 +1321,49 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts, Challenge & Hint into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
-                context.Hints.AddRange(new Hint
+                if (!context.Hints.Any())
                 {
-                    HintId = 1,
-                    HintInformation = "No. of Commands needed is 4",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 2,
-                    HintInformation = "The first command is Go Forward",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 3,
-                    HintInformation = "The second command is Right Turn",
-                    ChallengeId = 1
-                });
+                    context.Hints.AddRange(new Hint
+                    {
+                        HintId = 1,
+                        HintInformation = "No. of Commands needed is 4",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 2,
+                        HintInformation = "The first command is Go Forward",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 3,
+                        HintInformation = "The second command is Right Turn",
+                        ChallengeId = 1
+                    });
+                }
 
-                context.Challenges.Add(new Challenge
+                if (!context.Challenges.Any())
                 {
-                    ChallengeId = 1,
-                    Solution = "FRLS",
-                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
-                    IsTutorialChallenge = false,
-                    IsDeleted = false
-                });
+                    context.Challenges.Add(new Challenge
+                    {
+                        ChallengeId = 1,
+                        Solution = "FRLS",
+                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
+                        IsTutorialChallenge = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -1329,40 +1427,49 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts, Challenge & Hint into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
-                context.Hints.AddRange(new Hint
+                if (!context.Hints.Any())
                 {
-                    HintId = 1,
-                    HintInformation = "No. of Commands needed is 4",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 2,
-                    HintInformation = "The first command is Go Forward",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 3,
-                    HintInformation = "The second command is Right Turn",
-                    ChallengeId = 1
-                });
+                    context.Hints.AddRange(new Hint
+                    {
+                        HintId = 1,
+                        HintInformation = "No. of Commands needed is 4",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 2,
+                        HintInformation = "The first command is Go Forward",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 3,
+                        HintInformation = "The second command is Right Turn",
+                        ChallengeId = 1
+                    });
+                }
 
-                context.Challenges.Add(new Challenge
+                if (!context.Challenges.Any())
                 {
-                    ChallengeId = 1,
-                    Solution = "FRLS",
-                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
-                    IsTutorialChallenge = false,
-                    IsDeleted = false
-                });
+                    context.Challenges.Add(new Challenge
+                    {
+                        ChallengeId = 1,
+                        Solution = "FRLS",
+                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
+                        IsTutorialChallenge = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -1414,40 +1521,49 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts, Challenge & Hint into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
-                context.Hints.AddRange(new Hint
+                if (!context.Hints.Any())
                 {
-                    HintId = 1,
-                    HintInformation = "No. of Commands needed is 4",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 2,
-                    HintInformation = "The first command is Go Forward",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 3,
-                    HintInformation = "The second command is Right Turn",
-                    ChallengeId = 1
-                });
+                    context.Hints.AddRange(new Hint
+                    {
+                        HintId = 1,
+                        HintInformation = "No. of Commands needed is 4",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 2,
+                        HintInformation = "The first command is Go Forward",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 3,
+                        HintInformation = "The second command is Right Turn",
+                        ChallengeId = 1
+                    });
+                }
 
-                context.Challenges.Add(new Challenge
+                if (!context.Challenges.Any())
                 {
-                    ChallengeId = 1,
-                    Solution = "FRLS",
-                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
-                    IsTutorialChallenge = false,
-                    IsDeleted = true
-                });
+                    context.Challenges.Add(new Challenge
+                    {
+                        ChallengeId = 1,
+                        Solution = "FRLS",
+                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
+                        IsTutorialChallenge = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
@@ -1511,40 +1627,49 @@ namespace _2101WebPortalWhiteBoxTest
             // Seed Facilitator Accounts, Challenge & Hint into the database
             using (var context = new ApplicationDbContext(options))
             {
-                context.Facilitators.Add(new Facilitator
+                if (!context.Facilitators.Any())
                 {
-                    FacilitatorId = 1,
-                    Username = "instructor1",
-                    PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
-                    IsSystemAdmin = false,
-                    IsDeleted = false
-                });
+                    context.Facilitators.Add(new Facilitator
+                    {
+                        FacilitatorId = 1,
+                        Username = "instructor1",
+                        PasswordHash = "$2a$12$KayIXLK1VnQu641jW7olkuyV1vAErts6vkWsS47xLvXy3IEHQ84K",
+                        IsSystemAdmin = false,
+                        IsDeleted = false
+                    });
+                }
 
-                context.Hints.AddRange(new Hint
+                if (!context.Hints.Any())
                 {
-                    HintId = 1,
-                    HintInformation = "No. of Commands needed is 4",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 2,
-                    HintInformation = "The first command is Go Forward",
-                    ChallengeId = 1
-                }, new Hint
-                {
-                    HintId = 3,
-                    HintInformation = "The second command is Right Turn",
-                    ChallengeId = 1
-                });
+                    context.Hints.AddRange(new Hint
+                    {
+                        HintId = 1,
+                        HintInformation = "No. of Commands needed is 4",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 2,
+                        HintInformation = "The first command is Go Forward",
+                        ChallengeId = 1
+                    }, new Hint
+                    {
+                        HintId = 3,
+                        HintInformation = "The second command is Right Turn",
+                        ChallengeId = 1
+                    });
+                }
 
-                context.Challenges.Add(new Challenge
+                if (!context.Challenges.Any())
                 {
-                    ChallengeId = 1,
-                    Solution = "FRLS",
-                    MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
-                    IsTutorialChallenge = false,
-                    IsDeleted = true
-                });
+                    context.Challenges.Add(new Challenge
+                    {
+                        ChallengeId = 1,
+                        Solution = "FRLS",
+                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
+                        IsTutorialChallenge = false,
+                        IsDeleted = false
+                    });
+                }
 
                 context.SaveChanges();
             }
