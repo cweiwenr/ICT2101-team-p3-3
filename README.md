@@ -1,7 +1,7 @@
 # Pre-requistes
 ### Visual Studio IDE
 * The project is coded using the Asp.NET Core Framework and hence require that an Visual Studio IDE either [Visual Studio Community 2019](https://visualstudio.microsoft.com/downloads/) or [Visual Studio Community 2022](https://visualstudio.microsoft.com/downloads/) be used to build/run the project. 
-* Do also ensure that with you have selected the '**ASP.NET and Web Development**' workload when installing the IDE.  
+* Do also ensure that with you have selected the '**ASP.NET and Web Development**' workload when installing the IDE and the SDKs and Runtime listed [below](https://github.com/cweiwenr/ICT2101-team-p3-3#additional-sdks) are installed.  
 
 ### Additional SDKs
 The project is coded using the [.NET Core 3.1.415 SDK](https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.415-windows-x64-installer) as it has Long Term Support(LTS) and require the [Asp.NET Core 3.1.21 Runtime](https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-aspnetcore-3.1.21-windows-x64-installer) to run the project.
