@@ -51,12 +51,10 @@ namespace Vraze.Controllers
 
         [HttpGet]
         [Route("/Car/Update")]
-        public IActionResult Update(IFormCollection data)
+        public IActionResult Update([FromQuery(Name = "historyId")]int challengeHistoryId, [FromQuery(Name = "Speed")] double speed, [FromQuery(Name = "Distance")] double distance)
         {
             try
             {
-                int challengeHistoryId = int.Parse(data["historyId"]);
-
                 var currentChallengeHistory = _context.ChallengeHistories.FirstOrDefault(history => history.ChallengeHistoryId == challengeHistoryId);
 
                 if (currentChallengeHistory == null)
@@ -64,8 +62,8 @@ namespace Vraze.Controllers
                     return BadRequest();
                 }
 
-                currentChallengeHistory.CarDistanceTravelled = double.Parse(data["distance"]);
-                currentChallengeHistory.CarSpeed = double.Parse(data["speed"]);
+                currentChallengeHistory.CarDistanceTravelled = distance;
+                currentChallengeHistory.CarSpeed = speed;
 
                 _context.ChallengeHistories.Update(currentChallengeHistory);
                 _context.SaveChanges();

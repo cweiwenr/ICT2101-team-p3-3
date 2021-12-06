@@ -941,36 +941,14 @@ namespace _2101WebPortalWhiteBoxTest
                     });
                 }
 
-                if (!context.Hints.Any())
+                if (context.Challenges.Any())
                 {
-                    context.Hints.AddRange(new Hint
-                    {
-                        HintId = 1,
-                        HintInformation = "No. of Commands needed is 4",
-                        ChallengeId = 1
-                    }, new Hint
-                    {
-                        HintId = 2,
-                        HintInformation = "The first command is Go Forward",
-                        ChallengeId = 1
-                    }, new Hint
-                    {
-                        HintId = 3,
-                        HintInformation = "The second command is Right Turn",
-                        ChallengeId = 1
-                    });
+                    context.Challenges.RemoveRange(context.Challenges);
                 }
 
-                if (!context.Challenges.Any())
+                if (context.Hints.Any())
                 {
-                    context.Challenges.Add(new Challenge
-                    {
-                        ChallengeId = 1,
-                        Solution = "FRLS",
-                        MapImageUrl = "https://res.cloudinary.com/dj6afbyih/image/upload/v1637652773/ict1004/w89refxygucg8kqxs8ea.png",
-                        IsTutorialChallenge = false,
-                        IsDeleted = false
-                    });
+                    context.Hints.RemoveRange(context.Hints);
                 }
 
                 context.SaveChanges();
@@ -1157,6 +1135,11 @@ namespace _2101WebPortalWhiteBoxTest
                         IsTutorialChallenge = false,
                         IsDeleted = false
                     });
+                }
+
+                if (context.Hints.Any())
+                {
+                    context.Hints.RemoveRange(context.Hints);
                 }
 
                 context.SaveChanges();
